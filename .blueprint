@@ -1,0 +1,36 @@
+created:
+    - app/Http/Controllers/ProizvodController.php
+    - app/Http/Controllers/VrstaCokoladeController.php
+    - app/Http/Controllers/SirovinaController.php
+    - app/Http/Controllers/ProizvodniProcesController.php
+    - app/Http/Controllers/NarudzbinaController.php
+    - app/Http/Controllers/NaruciController.php
+    - database/factories/VrstaCokoladeFactory.php
+    - database/factories/ProizvodFactory.php
+    - database/factories/SirovinaFactory.php
+    - database/factories/ProizvodniProcesFactory.php
+    - database/factories/NarudzbinaFactory.php
+    - database/migrations/2025_12_15_191859_create_vrsta_cokolades_table.php
+    - database/migrations/2025_12_15_191900_create_proizvods_table.php
+    - database/migrations/2025_12_15_191901_create_sirovinas_table.php
+    - database/migrations/2025_12_15_191902_create_proizvodni_proces_table.php
+    - database/migrations/2025_12_15_191903_create_narudzbinas_table.php
+    - app/Models/VrstaCokolade.php
+    - app/Models/Proizvod.php
+    - app/Models/Sirovina.php
+    - app/Models/ProizvodniProces.php
+    - app/Models/Narudzbina.php
+    - tests/Feature/Http/Controllers/ProizvodControllerTest.php
+    - tests/Feature/Http/Controllers/VrstaCokoladeControllerTest.php
+    - tests/Feature/Http/Controllers/SirovinaControllerTest.php
+    - tests/Feature/Http/Controllers/ProizvodniProcesControllerTest.php
+    - tests/Feature/Http/Controllers/NarudzbinaControllerTest.php
+    - tests/Feature/Http/Controllers/NaruciControllerTest.php
+updated:
+    - routes/web.php
+models:
+    VrstaCokolade: { naziv: 'string:100', procenat_kakaa: integer, opis: 'text nullable' }
+    Proizvod: { naziv: 'string:255', opis: 'text nullable', cena: 'decimal:10,2', vrsta_cokolade_id: 'foreignId:vrsta_cokolades', status: 'enum:draft,active,archived default:active', slika: 'string:255 nullable' }
+    Sirovina: { naziv: 'string:255', kolicina_na_stanju: 'decimal:10,2 default:0.00', jedinica_mere: 'string:10', min_kolicina: 'decimal:10,2 default:10.00', cena_po_jedinici: 'decimal:10,2 default:0.00', status: 'enum:dostupno,nedostupno,kriticno default:dostupno' }
+    ProizvodniProces: { serijski_broj: 'string:50 unique', proizvod_id: 'foreignId:proizvods', kolicina_proizvoda: integer, datum_pocetka: date, datum_zavrsetka: 'date nullable', status: 'enum:planiran,u_toku,zavrsen,otkazan default:planiran', napomena: 'text nullable' }
+    Narudzbina: { broj_narudzbine: 'string:50 unique', ime_kupca: 'string:100', email: 'string:100', adresa: text, telefon: 'string:20', ukupna_cena: 'decimal:10,2 default:0.00', status: 'enum:kreirana,potvrdjena,u_obradi,poslata,dostavljena default:kreirana' }

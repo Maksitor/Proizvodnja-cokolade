@@ -1,0 +1,72 @@
+models:
+  # 1. Vrsta čokolade
+  VrstaCokolade:
+    naziv: string:100
+    procenat_kakaa: integer
+    opis: text nullable
+    # UKLONI: created_at: timestamp nullable
+    # UKLONI: updated_at: timestamp nullable
+    
+  # 2. Proizvod (cokolada)
+  Proizvod:
+    naziv: string:255
+    opis: text nullable
+    cena: decimal:10,2
+    vrsta_cokolade_id: foreignId:vrsta_cokolades
+    status: enum:draft,active,archived default:active
+    slika: string:255 nullable
+    # UKLONI: created_at i updated_at
+    
+  # 3. Sirovina
+  Sirovina:
+    naziv: string:255
+    kolicina_na_stanju: decimal:10,2 default:0.00
+    jedinica_mere: string:10
+    min_kolicina: decimal:10,2 default:10.00
+    cena_po_jedinici: decimal:10,2 default:0.00
+    status: enum:dostupno,nedostupno,kriticno default:dostupno
+    # UKLONI: created_at i updated_at
+    
+  # 4. Proizvodni proces (serija)
+  ProizvodniProces:
+    serijski_broj: string:50 unique
+    proizvod_id: foreignId:proizvods
+    kolicina_proizvoda: integer
+    datum_pocetka: date
+    datum_zavrsetka: date nullable
+    status: enum:planiran,u_toku,zavrsen,otkazan default:planiran
+    napomena: text nullable
+    # UKLONI: created_at i updated_at
+    
+  # 5. Narudžbina
+  Narudzbina:
+    broj_narudzbine: string:50 unique
+    ime_kupca: string:100
+    email: string:100
+    adresa: text
+    telefon: string:20
+    ukupna_cena: decimal:10,2 default:0.00
+    status: enum:kreirana,potvrdjena,u_obradi,poslata,dostavljena default:kreirana
+    # UKLONI: created_at i updated_at
+
+controllers:
+  # Ostatak ostaje isti
+  ProizvodController:
+    resource: Proizvod
+    
+  VrstaCokoladeController:
+    resource: VrstaCokolade
+    
+  SirovinaController:
+    resource: Sirovina
+    
+  ProizvodniProcesController:
+    resource: ProizvodniProces
+    
+  NarudzbinaController:
+    resource: Narudzbina
+    
+  NaruciController:
+    web:
+      create: public
+      store: public
