@@ -1,0 +1,33 @@
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.production
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.idea
+/.fleet
+/.vscode
+*.sqlite
+*.sqlite-journal
+.DS_Store
+
+# Laravel specific
+bootstrap/cache/*
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+
+# Composer
+/vendor/
+composer.lock
+
+# PHP
+.phpunit.result.cache
